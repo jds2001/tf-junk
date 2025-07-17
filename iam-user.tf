@@ -92,33 +92,22 @@ data "aws_iam_policy_document" "test-policy-document-2" {
 
 }
 
-resource "aws_iam_policy" "test-policy" {
+resource "aws_iam_role_policy" "test-policy" {
+  role = aws_iam_role.test_role.id
   name        = "test-policy"
-  description = "Test policy for S3 access"
   policy      = data.aws_iam_policy_document.test-policy-document.json
 }
 
-resource "aws_iam_policy" "test-policy-2" {
+resource "aws_iam_role_policy" "test-policy-2" {
+  role = aws_iam_role.test_role.id
   name        = "test-policy-2"
-  description = "Test policy for S3 access"
   policy      = data.aws_iam_policy_document.test-policy-document-2.json
 }
 
 resource "aws_iam_role" "test_role" {
   name               = "test-role2"
-  path               = "/somepath7/"
+  path               = "/somepath8/"
   assume_role_policy = data.aws_iam_policy_document.assume_role_policy.json
   force_detach_policies = true
-
-}
-
-resource "aws_iam_role_policy_attachment" "test_role_attachment" {
-  role       = aws_iam_role.test_role.name
-  policy_arn = aws_iam_policy.example_policy.arn
-}
-
-resource "aws_iam_role_policy_attachment" "test_role_attachment_2" {
-  role       = aws_iam_role.test_role.name
-  policy_arn = aws_iam_policy.second_policy.arn
 
 }
