@@ -106,8 +106,9 @@ resource "aws_iam_policy" "test-policy-2" {
 
 resource "aws_iam_role" "test_role" {
   name               = "test-role2"
-  path               = "/somepath6/"
+  path               = "/somepath7/"
   assume_role_policy = data.aws_iam_policy_document.assume_role_policy.json
+  force_detach_policies = true
 
 }
 
